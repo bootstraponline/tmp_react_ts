@@ -36,61 +36,62 @@ class App extends React.Component {
     super(props);
     _items = [
       {
-        'key': 'item-0',
-        'name': 'Item 0 11:18am'
+        key: 'item-0',
+        name: 'Item 0 11:18am'
       },
       {
-        'key': 'item-1',
-        'name': 'Item 1'
+        key: 'item-1',
+        name: 'Item 1'
       },
       {
-        'key': 'item-2',
-        'name': 'Item 2'
+        key: 'item-2',
+        name: 'Item 2'
       },
       {
-        'key': 'item-3',
-        'name': 'Item 3'
+        key: 'item-3',
+        name: 'Item 3'
       },
       {
-        'key': 'item-4',
-        'name': 'Item 4'
+        key: 'item-4',
+        name: 'Item 4'
       },
     ];
     /* tslint:disable:max-line-length */
-    // selection is required. 
+    // selection is required.
     // toggleRangeSelected errors on group click if selection is null
     this._selection = new Selection();
 
     const group0: IGroup = {
-      'key': 'group-0',
-      'name': 'group 0',
-      'startIndex': 0,
-      'count': 1,
+      key: 'group-0',
+      name: 'group 0',
+      startIndex: 0,
+      count: 1,
     };
 
     const group1: IGroup = {
-      'key': 'group-1',
-      'name': 'group 1',
-      'startIndex': 1,
-      'count': 1,
+      key: 'group-1',
+      name: 'group 1',
+      startIndex: 1,
+      count: 1,
     };
 
     const group2: IGroup = {
-      'key': 'group-2',
-      'name': 'group 2',
-      'startIndex': 2,
-      'count': 1,
+      key: 'group-2',
+      name: 'group 2',
+      startIndex: 2,
+      count: 1,
     };
 
     const group3: IGroup = {
-      'key': 'group-3',
-      'name': 'group 3 yay',
-      'startIndex': 3,
-      'count': 1,
+      key: 'group-3',
+      name: 'group 3 yay',
+      startIndex: 3,
+      count: 1,
     };
 
     _groups = [group0, group1, group2, group3];
 
+    this._onRenderCell = this._onRenderCell.bind(this);
     this._onRenderHeader = this._onRenderHeader.bind(this);
   }
 
@@ -119,7 +120,7 @@ class App extends React.Component {
 
   // Props is set via .bind in _onRenderHeader
   private _onGroupHeaderClick(props: IGroupDividerProps, group: IGroup): void {
-    props.onToggleCollapse!(group);
+    if (props.onToggleCollapse !== undefined) { props.onToggleCollapse(group); }
   }
 
   private _onRenderHeader(props: IGroupDividerProps): JSX.Element {

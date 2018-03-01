@@ -8,6 +8,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 create-react-app tmp_react_ts --scripts-version=react-scripts-ts
 yarn add office-ui-fabric-react
 yarn add file:packages/office-ui-fabric-react-tslint
+yarn add --dev tslint-microsoft-contrib
 ```
 
 
