@@ -57,13 +57,9 @@ class App extends React.Component {
       },
     ];
     /* tslint:disable:max-line-length */
-    // toggleRangeSelected
-    // https://github.com/OfficeDev/office-ui-fabric-react/blob/99e2a7a5b8e070bfd190f84a077b0aca7c633502/packages/office-ui-fabric-react/src/utilities/selection/Selection.ts#L394
+    // selection is required. 
+    // toggleRangeSelected errors on group click if selection is null
     this._selection = new Selection();
-    // this._selection.toggleRangeSelected = function(fromIndex: number, count: number) {
-    //   console.log(`toggleRangeSelected ${fromIndex} ${count}`);
-    // };
-    // this._selection.setItems(_items);
 
     const group0: IGroup = {
       'key': 'group-0',
@@ -96,7 +92,6 @@ class App extends React.Component {
     _groups = [group0, group1, group2, group3];
 
     this._onRenderHeader = this._onRenderHeader.bind(this);
-    // debugger;
   }
 
   public testAlert(): void {
@@ -107,7 +102,6 @@ class App extends React.Component {
     return (
       <div className='App'>
         <GroupedList
-          // ref={ this._createGroupedListRef }
           items={_items}
           onRenderCell={this._onRenderCell}
           selectionMode={SelectionMode.none}
