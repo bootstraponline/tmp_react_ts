@@ -132,7 +132,7 @@ class App extends React.Component {
   private _onRenderCell(nestingDepth: number, item: Item, itemIndex: number): JSX.Element {
     return (
       <div data-selection-index={itemIndex}>
-        <span>
+        <span className='GroupedList-name'>
           {item.name}
         </span>
       </div>
