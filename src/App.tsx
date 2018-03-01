@@ -4,9 +4,19 @@ import {
   GroupedList,
   IGroup
 } from 'office-ui-fabric-react/lib/components/GroupedList/index';
-import { SelectionMode } from 'office-ui-fabric-react/lib/utilities/selection/index';
+import {
+  Selection,
+  SelectionMode,
+  SelectionZone
+} from 'office-ui-fabric-react/lib/utilities/selection/index';
+import {
+  FocusZone
+} from 'office-ui-fabric-react/lib/FocusZone';
+import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 
-export interface Item {
+initializeIcons();
+
+interface Item {
   /**
    * Unique identifier for the item.
    */
@@ -20,16 +30,17 @@ export interface Item {
 let _items: Item[];
 let _groups: IGroup[];
 
-interface Props {
+export interface Props {
 }
 
 class App extends React.Component<Props> {
+  private _selection: Selection;
   constructor(props: Props) {
     super(props);
     _items = [
       {
         'key': 'item-0',
-        'name': 'Item 0'
+        'name': 'Item 0 11:18am'
       },
       {
         'key': 'item-1',
@@ -48,6 +59,9 @@ class App extends React.Component<Props> {
         'name': 'Item 4'
       },
     ];
+
+    this._selection = new Selection;
+    this._selection.setItems(_items);
 
     var group0: IGroup = {
       'key': 'group-0',
@@ -84,13 +98,21 @@ class App extends React.Component<Props> {
   render() {
     return (
       <div className="App">
-        <GroupedList
-          // ref={ this._createGroupedListRef }
-          items={_items}
-          onRenderCell={this._onRenderCell}
+      <FocusZone>
+        <SelectionZone
+          selection={this._selection}
           selectionMode={SelectionMode.none}
-          groups={_groups}
-        />
+        >
+          <GroupedList
+            // ref={ this._createGroupedListRef }
+            items={_items}
+            onRenderCell={this._onRenderCell}
+            selectionMode={SelectionMode.none}
+            selection={this._selection}
+            groups={_groups}
+          />
+        </SelectionZone>
+      </FocusZone>
       </div>
     );
   }
