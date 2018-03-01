@@ -37,24 +37,12 @@ class App extends React.Component {
     _items = [
       {
         key: 'item-0',
-        name: 'Item 0 11:18am'
+        name: 'android.support.test.espresso.NoMatchingViewException: No views in hierarchy found matching: (with text: is "Everyone" and has sibling: with id: com.instructure.teacher:id/assigneeSubtitleView)'
       },
       {
         key: 'item-1',
-        name: 'Item 1'
-      },
-      {
-        key: 'item-2',
-        name: 'Item 2'
-      },
-      {
-        key: 'item-3',
-        name: 'Item 3'
-      },
-      {
-        key: 'item-4',
-        name: 'Item 4'
-      },
+        name: 'java.lang.RuntimeException: Waited for the root of the view hierarchy to have window focus and not request layout for 10 seconds. If you specified a non default root matcher, it may be picking a root that never takes focus.'
+      }
     ];
     /* tslint:disable:max-line-length */
     // selection is required.
@@ -63,33 +51,19 @@ class App extends React.Component {
 
     const group0: IGroup = {
       key: 'group-0',
-      name: 'group 0',
+      name: 'AssigneeListPageTest#displaysStudentItems',
       startIndex: 0,
       count: 1,
     };
 
     const group1: IGroup = {
       key: 'group-1',
-      name: 'group 1',
+      name: 'SpeedGraderCommentsPageTest#displaysAuthorName',
       startIndex: 1,
       count: 1,
     };
 
-    const group2: IGroup = {
-      key: 'group-2',
-      name: 'group 2',
-      startIndex: 2,
-      count: 1,
-    };
-
-    const group3: IGroup = {
-      key: 'group-3',
-      name: 'group 3 yay',
-      startIndex: 3,
-      count: 1,
-    };
-
-    _groups = [group0, group1, group2, group3];
+    _groups = [group0, group1];
 
     this._onRenderCell = this._onRenderCell.bind(this);
     this._onRenderHeader = this._onRenderHeader.bind(this);

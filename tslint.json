@@ -11,6 +11,7 @@
     "no-submodule-imports": false,
     "completed-docs": [false, "classes"],
     "no-unsafe-any": false,
-    "no-default-export": false
+    "no-default-export": false,
+    "max-line-length": false
   }
 }
