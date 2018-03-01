@@ -1,20 +1,20 @@
 import * as React from 'react';
 import './App.css';
 import {
+  IGroupDividerProps,
   GroupedList,
   IGroup
 } from 'office-ui-fabric-react/lib/components/GroupedList/index';
+import { GroupHeader } from 'office-ui-fabric-react/lib/components/GroupedList/GroupHeader';
 import {
   Selection,
-  SelectionMode,
-  SelectionZone
+  SelectionMode
 } from 'office-ui-fabric-react/lib/utilities/selection/index';
-import {
-  FocusZone
-} from 'office-ui-fabric-react/lib/FocusZone';
+// https://github.com/OfficeDev/office-ui-fabric-react/wiki/Using-icons
 import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
-
 initializeIcons();
+
+ /* tslint:disable:no-debugger */
 
 interface Item {
   /**
@@ -30,12 +30,9 @@ interface Item {
 let _items: Item[];
 let _groups: IGroup[];
 
-export interface Props {
-}
-
-class App extends React.Component<Props> {
+class App extends React.Component {
   private _selection: Selection;
-  constructor(props: Props) {
+  constructor(props: {}) {
     super(props);
     _items = [
       {
@@ -59,32 +56,37 @@ class App extends React.Component<Props> {
         'name': 'Item 4'
       },
     ];
+    /* tslint:disable:max-line-length */
+    // toggleRangeSelected
+    // https://github.com/OfficeDev/office-ui-fabric-react/blob/99e2a7a5b8e070bfd190f84a077b0aca7c633502/packages/office-ui-fabric-react/src/utilities/selection/Selection.ts#L394
+    this._selection = new Selection();
+    // this._selection.toggleRangeSelected = function(fromIndex: number, count: number) {
+    //   console.log(`toggleRangeSelected ${fromIndex} ${count}`);
+    // };
+    // this._selection.setItems(_items);
 
-    this._selection = new Selection;
-    this._selection.setItems(_items);
-
-    var group0: IGroup = {
+    const group0: IGroup = {
       'key': 'group-0',
       'name': 'group 0',
       'startIndex': 0,
       'count': 1,
     };
 
-    var group1: IGroup = {
+    const group1: IGroup = {
       'key': 'group-1',
       'name': 'group 1',
       'startIndex': 1,
       'count': 1,
     };
 
-    var group2: IGroup = {
+    const group2: IGroup = {
       'key': 'group-2',
       'name': 'group 2',
       'startIndex': 2,
       'count': 1,
     };
 
-    var group3: IGroup = {
+    const group3: IGroup = {
       'key': 'group-3',
       'name': 'group 3 yay',
       'startIndex': 3,
@@ -92,32 +94,47 @@ class App extends React.Component<Props> {
     };
 
     _groups = [group0, group1, group2, group3];
+
+    this._onRenderHeader = this._onRenderHeader.bind(this);
     // debugger;
   }
 
-  render() {
+  public testAlert(): void {
+    alert('hello');
+  }
+
+  public render(): JSX.Element {
     return (
-      <div className="App">
-      <FocusZone>
-        <SelectionZone
-          selection={this._selection}
+      <div className='App'>
+        <GroupedList
+          // ref={ this._createGroupedListRef }
+          items={_items}
+          onRenderCell={this._onRenderCell}
           selectionMode={SelectionMode.none}
-        >
-          <GroupedList
-            // ref={ this._createGroupedListRef }
-            items={_items}
-            onRenderCell={this._onRenderCell}
-            selectionMode={SelectionMode.none}
-            selection={this._selection}
-            groups={_groups}
-          />
-        </SelectionZone>
-      </FocusZone>
+          selection={this._selection}
+          groups={_groups}
+          groupProps={
+            {
+              onRenderHeader: this._onRenderHeader
+            }
+          }
+        />
       </div>
     );
   }
 
-  private _onRenderCell(nestingDepth: number, item: Item, itemIndex: number) {
+  // Props is set via .bind in _onRenderHeader
+  private _onGroupHeaderClick(props: IGroupDividerProps, group: IGroup): void {
+    props.onToggleCollapse!(group);
+  }
+
+  private _onRenderHeader(props: IGroupDividerProps): JSX.Element {
+    props.onGroupHeaderClick = this._onGroupHeaderClick.bind(null, props);
+
+    return <GroupHeader { ...props } />;
+  }
+
+  private _onRenderCell(nestingDepth: number, item: Item, itemIndex: number): JSX.Element {
     return (
       <div data-selection-index={itemIndex}>
         <span>

@@ -15,11 +15,12 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/prop-types": "^15.5.2",
     "@types/jest": "^22.1.4",
     "@types/node": "^9.4.6",
+    "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.39",
     "@types/react-dom": "^16.0.4",
+    "office-ui-fabric-react-tslint": "file:packages/office-ui-fabric-react-tslint",
     "typescript": "^2.7.2"
   }
 }
