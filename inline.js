@@ -9,5 +9,5 @@ inline.html({
 },
 function(err, result) {
   if (err) { console.log(err); }
-  fs.writeFileSync("./build/inline.html", result);
+  fs.writeFileSync("./bitrise/inline.html", result);
 });
